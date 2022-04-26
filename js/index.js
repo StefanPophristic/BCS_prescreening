@@ -101,7 +101,7 @@ function make_slides(f) {
       exp.email = document.getElementById("email").value;
       exp.data_trials.push({
         "trial_type" : "info",
-        'email' : exp.email
+        'response' : exp.email
       });
         exp.go();
     }
@@ -129,6 +129,7 @@ function make_slides(f) {
           "time_in_minutes" : (Date.now() - exp.startT)/60000
       };
       proliferate.submit(exp.data);
+
     }
   });
 
