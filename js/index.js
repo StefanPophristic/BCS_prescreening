@@ -1,7 +1,7 @@
 function make_slides(f) {
   var   slides = {};
   var participationStatus = 0;
-  var disqualifyCounter = 3;
+  var disqualifyCounter = 0;
 
   slides.bot = slide({
     name : "bot",
@@ -16,7 +16,7 @@ function make_slides(f) {
     button : function() {
       exp.text_input = document.getElementById("text_box").value;
       console.log(exp.text_input);
-      if((disqualifyCounter == 3) && (exp.text_input == "u" | exp.text_input == "U" |
+      if((disqualifyCounter < 3) && (exp.text_input == "u" | exp.text_input == "U" |
       exp.text_input == "u." | exp.text_input == "U." )){
         console.log("enter");
         exp.data_trials.push({
@@ -35,17 +35,17 @@ function make_slides(f) {
           "image" : exp.listener,
           "response" : [0,exp.text_input]
         });
-        if (disqualifyCounter == 3){
+        if (disqualifyCounter == 0){
           $('.err1').show();
-        }if (disqualifyCounter == 2){
+        }if (disqualifyCounter == 1){
           $('.err1').hide();
           $('.err2').show();
-        }if (disqualifyCounter == 1){
+        }if (disqualifyCounter == 2){
           $('.err2').hide();
           $('.disq').show();
           $('.button').hide();
         }
-        disqualifyCounter = disqualifyCounter - 1;
+        disqualifyCounter += 1;
       }
     },
   });
