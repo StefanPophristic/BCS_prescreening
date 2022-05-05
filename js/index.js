@@ -10,20 +10,30 @@ function make_slides(f) {
       $('.err2').hide();
       $('.disq').hide();
 
-      document.getElementById("s").innerHTML = "Molimo vas popunite nedostajuće slovo poslednje reči ove rečenice:";
-      document.getElementById("q").innerHTML = "Ja volim svoju sestr";
+      document.getElementById("s").innerHTML = "Molimo vas popunite nedostajuća slova poslednjih reči ovih rečenica:";
+      document.getElementById("q").innerHTML = "Ja volim svoju tetk";
+      document.getElementById("q2").innerHTML = "Ovo je moja sestra, Maja. Ona se nalazi u drugoj sobi i ja hoću da je dozovem. Da je dozovem, ja ću da viknem: Maj";
     },
     button : function() {
       exp.text_input = document.getElementById("text_box").value;
+      exp.text_input_2 = document.getElementById("text_box_2").value;
+
       console.log(exp.text_input);
-      if((disqualifyCounter < 3) && (exp.text_input == "u" | exp.text_input == "U" |
-      exp.text_input == "u." | exp.text_input == "U." )){
-        console.log("enter");
-        exp.data_trials.push({
-          "slide_number": exp.phase,
-          "trial_type" : "bot_check",
-          "image" : exp.listener,
-          "response" : [0,exp.text_input]
+      console.log(exp.text_input_2);
+
+      if(
+        (disqualifyCounter < 3) &&
+        (exp.text_input == "u" | exp.text_input == "U" |
+          exp.text_input == "u." | exp.text_input == "U." ) &&
+        (exp.text_input_2 == "o" | exp.text_input_2 == "O" |
+          exp.text_input_2 == "o."  | exp.text_input_2 == "O." ) ){
+            console.log("enter");
+            exp.data_trials.push({
+              "slide_number": exp.phase,
+              "trial_type" : "bot_check",
+              "image" : exp.listener,
+              "response" : [0,exp.text_input],
+              "response2" : [0, exp.text_input2]
         });
         exp.go();
       }
@@ -33,7 +43,8 @@ function make_slides(f) {
           "slide_number": exp.phase,
           "trial_type" : "bot_check",
           "image" : exp.listener,
-          "response" : [0,exp.text_input]
+          "response" : [0,exp.text_input],
+          "response2" : [0, exp.text_input2]
         });
         if (disqualifyCounter == 0){
           $('.err1').show();
